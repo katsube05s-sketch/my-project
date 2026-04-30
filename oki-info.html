@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隠岐の魅力 | 隠岐青年会議所</title>
+  <meta name="description" content="島根県隠岐郡の魅力・観光・文化・自然をご紹介します。ユネスコ世界ジオパーク認定の離島。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ジオパークヒーロー */
+    .oki-hero {
+      position: relative;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .oki-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://picsum.photos/seed/oki-geo/1600/800') center/cover no-repeat;
+    }
+    .oki-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(2,48,71,0.85), rgba(0,119,182,0.6));
+    }
+    .oki-hero-content {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 24px;
+      text-align: center;
+      color: white;
+    }
+    .oki-hero-tag {
+      display: inline-block;
+      padding: 6px 20px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+    .oki-hero-content h2 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 900;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    .oki-hero-content p {
+      font-size: 16px;
+      opacity: 0.9;
+      line-height: 1.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* 4島カード */
+    .island-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .island-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+    }
+    .island-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .island-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .island-card-body { padding: 20px 16px; }
+    .island-name {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .island-name-en {
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .island-pop {
+      display: inline-block;
+      padding: 3px 12px;
+      background: var(--bg);
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .island-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* 魅力セクション */
+    .charm-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    .charm-section.reverse { direction: rtl; }
+    .charm-section.reverse > * { direction: ltr; }
+    .charm-img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+    }
+    .charm-img img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+    }
+    .charm-tag-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .charm-tag {
+      display: inline-block;
+      padding: 4px 14px;
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .charm-body h3 {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .charm-body p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+
+    /* 食の魅力 */
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .food-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .food-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .food-card img { width: 100%; height: 180px; object-fit: cover; }
+    .food-card-body { padding: 16px 20px; }
+    .food-name { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+    .food-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
+
+    /* アクセス */
+    .access-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .access-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .access-icon { font-size: 40px; margin-bottom: 12px; }
+    .access-from { font-size: 14px; color: var(--gray); margin-bottom: 8px; }
+    .access-route { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .access-time { font-size: 24px; font-weight: 900; color: var(--primary); }
+    .access-time span { font-size: 14px; }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) { .island-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .charm-section { grid-template-columns: 1fr; gap: 32px; }
+      .charm-section.reverse { direction: ltr; }
+      .food-grid { grid-template-columns: 1fr; }
+      .access-grid { grid-template-columns: 1fr; }
+      .island-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <div class="header-logo-icon">OKI<br>JC</div>
+      <div class="header-logo-text">
+        <span class="org-name">隠岐青年会議所</span>
+        <span class="org-sub">OKI JUNIOR CHAMBER</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="about.html">JCについて</a>
+      <a href="activities.html">活動・事業</a>
+      <a href="news.html">お知らせ</a>
+      <a href="oki-info.html" class="active">隠岐の魅力</a>
+      <a href="sponsor.html">スポンサー</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" target="_blank" rel="noopener" class="header-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="join.html" class="header-join-btn">入会案内</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">🏠 ホーム</a>
+  <a href="about.html">📖 JCについて</a>
+  <a href="members.html">👥 メンバー紹介</a>
+  <a href="activities.html">🎯 活動・事業</a>
+  <a href="news.html">📢 お知らせ</a>
+  <a href="oki-info.html">🏝️ 隠岐の魅力</a>
+  <a href="national-jc.html">🗾 全国JC活動</a>
+  <a href="sponsor.html">🤝 スポンサー募集</a>
+  <a href="join.html">✨ 入会案内</a>
+  <a href="#" target="_blank" rel="noopener" class="mobile-instagram">📷 Instagram をフォロー</a>
+</nav>
+
+<div class="page-content">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="index.html">ホーム</a>
+      <span>›</span>
+      <span>隠岐の魅力</span>
+    </div>
+  </div>
+
+  <!-- ジオパークヒーロー -->
+  <div class="oki-hero">
+    <div class="oki-hero-bg"></div>
+    <div class="oki-hero-overlay"></div>
+    <div class="oki-hero-content">
+      <div class="oki-hero-tag">🌍 UNESCO World Geopark</div>
+      <h2>隠岐ユネスコ世界ジオパーク</h2>
+      <p>
+        2013年、隠岐はユネスコ世界ジオパークに認定されました。
+        2億5千万年の地球の歴史が刻まれた大地、透明度抜群の海、
+        固有の生き物たちが暮らす離島生態系——
+        日本でもここだけの自然が広がります。
+      </p>
+    </div>
+  </div>
+
+  <!-- 4島紹介 -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">4 ISLANDS</div>
+        <h2 class="section-title">隠岐の<span>4つの島</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">隠岐は島前3島と島後1島の、個性豊かな4つの有人島で構成されています。</p>
+      </div>
+      <div class="island-grid">
+        <div class="island-card fade-in">
+          <img src="https://picsum.photos/seed/dogo/400/200" alt="隠岐の島町（島後）">
+          <div class="island-card-body">
+            <div class="island-name">隠岐の島町</div>
+            <div class="island-name-en">OKINOSHIMA (DOGO)</div>
+            <span class="island-pop">約13,000人</span>
+            <p class="island-desc">隠岐最大の島・島後。隠岐空港があり玄関口として機能。玉若酢命神社など古社が多く歴史を感じる島。</p>
+          </div>
+        </div>
+        <div class="island-card fade-in">
+          <img src="https://picsum.photos/seed/nishioshima/400/200" alt="西ノ島町">
+          <div class="island-card-body">
+            <div class="island-name">西ノ島町</div>
+            <div class="island-name-en">NISHINOSHIMA</div>
+            <span class="island-pop">約2,700人</span>
+            <p class="island-desc">国賀海岸の断崖絶壁が有名。放牧された牛や馬が草原を歩く「摩天崖」は圧巻の絶景。</p>
+          </div>
+        </div>
+        <div class="island-card fade-in">
+          <img src="https://picsum.photos/seed/chiibu/400/200" alt="海士町">
+          <div class="island-card-body">
+            <div class="island-name">海士町</div>
+            <div class="island-name-en">AMA</div>
+            <span class="island-pop">約2,200人</span>
+            <p class="island-desc">日本初の離島での留学「隠岐島前高校魅力化プロジェクト」で全国から注目を集める島。ないものはない。</p>
+          </div>
+        </div>
+        <div class="island-card fade-in">
+          <img src="https://picsum.photos/seed/chibu/400/200" alt="知夫里島">
+          <div class="island-card-body">
+            <div class="island-name">知夫里島</div>
+            <div class="island-name-en">CHIBU</div>
+            <span class="island-pop">約600人</span>
+            <p class="island-desc">島前諸島で最も小さな島。赤壁と知夫の里展望台からの絶景が有名。のんびりとした時間が流れる。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 自然の魅力 -->
+  <section class="section" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">NATURE</div>
+        <h2 class="section-title">隠岐の<span>自然</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="charm-section fade-in">
+        <div class="charm-img">
+          <img src="https://picsum.photos/seed/oki-cliff/700/360" alt="国賀海岸の断崖">
+        </div>
+        <div class="charm-body">
+          <h3>🌊 雄大な海岸線と断崖絶壁</h3>
+          <p>西ノ島の国賀海岸は、高さ257mの摩天崖をはじめとする断崖が続く絶景スポット。透明度の高い海に映える白い砂浜も点在し、シーカヤックやダイビングも楽しめます。</p>
+          <p>島後の後白河法皇ゆかりの「ローソク島」は、夕日を背に燭台のようにそびえる奇岩で、遊覧船からの景観は格別です。</p>
+          <div class="charm-tag-list">
+            <span class="charm-tag">断崖絶壁</span>
+            <span class="charm-tag">シーカヤック</span>
+            <span class="charm-tag">ダイビング</span>
+            <span class="charm-tag">遊覧船</span>
+          </div>
+        </div>
+      </div>
+      <div class="charm-section reverse fade-in">
+        <div class="charm-img">
+          <img src="https://picsum.photos/seed/oki-forest/700/360" alt="隠岐の森">
+        </div>
+        <div class="charm-body">
+          <h3>🌿 豊かな森と固有の生態系</h3>
+          <p>隠岐は大陸から切り離されたことで、本土と異なる独自の生態系が発達しました。「隠岐固有種」と呼ばれる動植物が多く生息しており、植物学の権威・牧野富太郎も調査に訪れた地です。</p>
+          <p>春には桜、初夏にはオキナグサ、秋には紅葉と、四季折々の自然美が楽しめます。</p>
+          <div class="charm-tag-list">
+            <span class="charm-tag">固有種</span>
+            <span class="charm-tag">トレッキング</span>
+            <span class="charm-tag">バードウォッチング</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 文化・歴史 -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">CULTURE</div>
+        <h2 class="section-title">隠岐の<span>文化・歴史</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="charm-section fade-in">
+        <div class="charm-img">
+          <img src="https://picsum.photos/seed/oki-shrine/700/360" alt="玉若酢命神社">
+        </div>
+        <div class="charm-body">
+          <h3>⛩️ 流刑の地から生まれた文化</h3>
+          <p>隠岐は古代から流刑の地として知られ、後鳥羽上皇・後醍醐天皇が流された歴史を持ちます。その歴史が独特の文化を育み、島では今も古式ゆかしい神事・祭りが受け継がれています。</p>
+          <p>「古典相撲」や「ホーランエンヤ」など、本土では失われた文化が隠岐に残り、全国から研究者や文化愛好家が訪れます。</p>
+          <div class="charm-tag-list">
+            <span class="charm-tag">流刑の地</span>
+            <span class="charm-tag">古典相撲</span>
+            <span class="charm-tag">後鳥羽院</span>
+            <span class="charm-tag">神社</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 食の魅力 -->
+  <section class="section" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">FOOD</div>
+        <h2 class="section-title">隠岐の<span>食の魅力</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">豊かな海と大地が育む、隠岐ならではの食材と料理。</p>
+      </div>
+      <div class="food-grid">
+        <div class="food-card fade-in">
+          <img src="https://picsum.photos/seed/oki-seafood/600/180" alt="隠岐の海の幸">
+          <div class="food-card-body">
+            <div class="food-name">🦞 隠岐の岩ガキ・サザエ</div>
+            <p class="food-desc">日本海の荒波で育った岩ガキは、濃厚な旨みと大きさが自慢。6〜8月が旬で、新鮮な生ガキは絶品です。</p>
+          </div>
+        </div>
+        <div class="food-card fade-in">
+          <img src="https://picsum.photos/seed/oki-beef/600/180" alt="隠岐牛">
+          <div class="food-card-body">
+            <div class="food-name">🥩 隠岐牛</div>
+            <p class="food-desc">放牧で育つ隠岐牛は、ストレスが少なく旨みが濃い。島内の食堂やBBQで味わえる贅沢な逸品。</p>
+          </div>
+        </div>
+        <div class="food-card fade-in">
+          <img src="https://picsum.photos/seed/oki-fish/600/180" alt="隠岐の地魚">
+          <div class="food-card-body">
+            <div class="food-name">🐟 四季の地魚</div>
+            <p class="food-desc">サゴシ・ブリ・マダイなど季節ごとに豊富な魚が水揚げされます。漁師直送の鮮魚は旅の最高の思い出に。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- アクセス -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">ACCESS</div>
+        <h2 class="section-title">隠岐への<span>アクセス</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="access-grid fade-in">
+        <div class="access-card">
+          <div class="access-icon">✈️</div>
+          <div class="access-from">大阪（伊丹）から</div>
+          <div class="access-route">飛行機（隠岐空港）</div>
+          <div class="access-time">約55<span>分</span></div>
+        </div>
+        <div class="access-card">
+          <div class="access-icon">⛴️</div>
+          <div class="access-from">松江（七類港）から</div>
+          <div class="access-route">フェリー・高速船</div>
+          <div class="access-time">約2.5<span>〜3時間</span></div>
+        </div>
+        <div class="access-card">
+          <div class="access-icon">⛵</div>
+          <div class="access-from">境港から</div>
+          <div class="access-route">フェリー</div>
+          <div class="access-time">約3<span>時間</span></div>
+        </div>
+      </div>
+      <div class="highlight-box fade-in" style="margin-top:32px;">
+        <p>※ 運航スケジュールは季節により変動します。詳しくは「隠岐汽船」「日本航空」の公式ウェブサイトでご確認ください。</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-icon">OKI<br>JC</div>
+        <div class="footer-logo-text">
+          <div class="org-name">隠岐青年会議所</div>
+          <div class="org-sub">OKI JUNIOR CHAMBER</div>
+        </div>
+      </div>
+      <p class="footer-desc">島根県隠岐郡に根ざした青年団体として、地域の未来づくりと自己成長に取り組んでいます。<br>〒685-0000 島根県隠岐郡隠岐の島町○○○</p>
+      <a href="#" target="_blank" rel="noopener" class="footer-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+    <div class="footer-nav">
+      <h4>組織について</h4>
+      <ul>
+        <li><a href="about.html">JCについて</a></li>
+        <li><a href="members.html">メンバー紹介</a></li>
+        <li><a href="national-jc.html">全国JC活動</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>活動・情報</h4>
+      <ul>
+        <li><a href="activities.html">活動・事業</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="oki-info.html">隠岐の魅力</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>参加・支援</h4>
+      <ul>
+        <li><a href="join.html">入会案内</a></li>
+        <li><a href="sponsor.html">スポンサー募集</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 隠岐青年会議所. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

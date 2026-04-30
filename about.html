@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JCについて | 隠岐青年会議所</title>
+  <meta name="description" content="隠岐青年会議所の理念・活動目的・歴史についてご紹介します。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+    .mission-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-top: 4px solid transparent;
+    }
+    .mission-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .mission-card.blue { border-top-color: var(--primary); }
+    .mission-card.teal { border-top-color: var(--secondary); }
+    .mission-card.orange { border-top-color: var(--accent); }
+    .mission-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .mission-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .mission-en {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+    .mission-text {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    /* タイムライン */
+    .timeline {
+      position: relative;
+      padding-left: 48px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -36px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background: var(--primary);
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .timeline-year {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+    .timeline-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .timeline-text {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    /* 活動目的 */
+    .purpose-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+    .purpose-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: var(--transition);
+    }
+    .purpose-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .purpose-num {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--primary);
+      opacity: 0.2;
+      line-height: 1;
+      min-width: 48px;
+    }
+    .purpose-body h4 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .purpose-body p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    /* JCI */
+    .jci-section {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .jci-section h3 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .jci-section p {
+      font-size: 14px;
+      line-height: 1.9;
+      opacity: 0.85;
+    }
+    .jci-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .jci-stat {
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .jci-stat .num {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--accent-light);
+      margin-bottom: 4px;
+    }
+    .jci-stat .label {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .mission-grid { grid-template-columns: 1fr; }
+      .purpose-grid { grid-template-columns: 1fr; }
+      .jci-section { grid-template-columns: 1fr; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <div class="header-logo-icon">OKI<br>JC</div>
+      <div class="header-logo-text">
+        <span class="org-name">隠岐青年会議所</span>
+        <span class="org-sub">OKI JUNIOR CHAMBER</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="about.html" class="active">JCについて</a>
+      <a href="activities.html">活動・事業</a>
+      <a href="news.html">お知らせ</a>
+      <a href="oki-info.html">隠岐の魅力</a>
+      <a href="sponsor.html">スポンサー</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" target="_blank" rel="noopener" class="header-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="join.html" class="header-join-btn">入会案内</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">🏠 ホーム</a>
+  <a href="about.html">📖 JCについて</a>
+  <a href="members.html">👥 メンバー紹介</a>
+  <a href="activities.html">🎯 活動・事業</a>
+  <a href="news.html">📢 お知らせ</a>
+  <a href="oki-info.html">🏝️ 隠岐の魅力</a>
+  <a href="national-jc.html">🗾 全国JC活動</a>
+  <a href="sponsor.html">🤝 スポンサー募集</a>
+  <a href="join.html">✨ 入会案内</a>
+  <a href="#" target="_blank" rel="noopener" class="mobile-instagram">📷 Instagram をフォロー</a>
+</nav>
+
+<div class="page-content">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="index.html">ホーム</a>
+      <span>›</span>
+      <span>JCについて</span>
+    </div>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-tag">ABOUT US</div>
+    <h1>JCについて</h1>
+    <p>隠岐青年会議所の理念・目的・歴史をご紹介します</p>
+  </section>
+
+  <!-- 三信条 -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">PHILOSOPHY</div>
+        <h2 class="section-title">青年会議所の<span>三信条</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">JCの活動はこの三つの信条を礎として展開されます。</p>
+      </div>
+      <div class="mission-grid">
+        <div class="mission-card blue fade-in">
+          <div class="mission-icon">⚡</div>
+          <div class="mission-en">TRAINING</div>
+          <div class="mission-title">修練</div>
+          <p class="mission-text">自らを磨き、知識・技能・人間力を高め続けることで、社会のリーダーとして成長します。研修や勉強会を通じて常に学び続ける姿勢を大切にします。</p>
+        </div>
+        <div class="mission-card teal fade-in">
+          <div class="mission-icon">🌊</div>
+          <div class="mission-en">SERVICE</div>
+          <div class="mission-title">奉仕</div>
+          <p class="mission-text">地域社会への奉仕活動を通じて、隠岐の人々の笑顔と豊かな暮らしに貢献します。利他の精神で地域に根ざした活動を行います。</p>
+        </div>
+        <div class="mission-card orange fade-in">
+          <div class="mission-icon">🤝</div>
+          <div class="mission-en">FRIENDSHIP</div>
+          <div class="mission-title">友情</div>
+          <p class="mission-text">国内外の青年との友情を育み、広いネットワークを構築します。JCの仲間との絆は生涯の財産となります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 活動目的 -->
+  <section class="section" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">MISSION</div>
+        <h2 class="section-title">活動の<span>目的</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">隠岐青年会議所が取り組む4つの主要ミッションです。</p>
+      </div>
+      <div class="purpose-grid">
+        <div class="purpose-card fade-in">
+          <div class="purpose-num">01</div>
+          <div class="purpose-body">
+            <h4>地域社会の発展</h4>
+            <p>隠岐の地域課題に向き合い、持続可能なまちづくりを推進します。産業振興、観光開発、移住促進など幅広いテーマで活動します。</p>
+          </div>
+        </div>
+        <div class="purpose-card fade-in">
+          <div class="purpose-num">02</div>
+          <div class="purpose-body">
+            <h4>青少年の健全育成</h4>
+            <p>次世代を担う子どもたちが夢を持ち、郷土愛を育めるよう、教育・体験プログラムを実施します。</p>
+          </div>
+        </div>
+        <div class="purpose-card fade-in">
+          <div class="purpose-num">03</div>
+          <div class="purpose-body">
+            <h4>自然環境の保全</h4>
+            <p>世界ジオパークに認定された隠岐の豊かな自然を守り、次世代に引き継ぐための環境保全活動を行います。</p>
+          </div>
+        </div>
+        <div class="purpose-card fade-in">
+          <div class="purpose-num">04</div>
+          <div class="purpose-body">
+            <h4>国際交流の促進</h4>
+            <p>JCIのネットワークを活かして国際的な視野を広げ、隠岐と世界をつなぐ架け橋となる活動を展開します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JCI・日本JC -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="jci-section fade-in">
+        <div>
+          <h3>日本青年会議所（JCI Japan）とは</h3>
+          <p>
+            青年会議所は1915年にアメリカで誕生した国際的な組織です。
+            日本では1949年に設立され、全国各地に700以上のJCがあります。
+            隠岐青年会議所もその一員として、全国・国際的なネットワークの中で活動しています。<br><br>
+            JCIは「よりよい世界を創ろう（Building a Better World）」を理念に掲げ、
+            世界120か国以上に約20万人のメンバーが在籍しています。
+          </p>
+        </div>
+        <div class="jci-stats">
+          <div class="jci-stat">
+            <div class="num">120<span style="font-size:20px;">+</span></div>
+            <div class="label">加盟国数</div>
+          </div>
+          <div class="jci-stat">
+            <div class="num">20万<span style="font-size:16px;">人</span></div>
+            <div class="label">世界のメンバー</div>
+          </div>
+          <div class="jci-stat">
+            <div class="num">700<span style="font-size:20px;">+</span></div>
+            <div class="label">国内JC数</div>
+          </div>
+          <div class="jci-stat">
+            <div class="num">1949<span style="font-size:16px;">年</span></div>
+            <div class="label">日本JC設立</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 歴史 -->
+  <section class="section" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">HISTORY</div>
+        <h2 class="section-title">隠岐JCの<span>歴史</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">創立から現在まで、島の未来を見据えた活動の歩みです。</p>
+      </div>
+      <div class="timeline fade-in">
+        <div class="timeline-item">
+          <div class="timeline-year">1980年代</div>
+          <div class="timeline-title">隠岐青年会議所 設立</div>
+          <p class="timeline-text">島の青年たちの熱意により隠岐青年会議所が設立。地域課題の解決と青年の自己啓発を目指し、活動を開始しました。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1990年代</div>
+          <div class="timeline-title">地域活性化事業の本格化</div>
+          <p class="timeline-text">観光振興や産業育成など地域活性化に向けた事業が本格化。全国のJCとの交流も活発化しました。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2000年代</div>
+          <div class="timeline-title">青少年育成プログラムの開始</div>
+          <p class="timeline-text">島の子どもたちを対象にした体験学習プログラムや職業体験イベントを開始。次世代育成への取り組みを強化しました。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2013年</div>
+          <div class="timeline-title">隠岐ユネスコ世界ジオパーク認定</div>
+          <p class="timeline-text">隠岐のユネスコ世界ジオパーク認定を契機に、自然環境保全活動と観光PR活動を強化。隠岐の魅力発信に注力しました。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2020年代</div>
+          <div class="timeline-title">デジタル化と新たな挑戦</div>
+          <p class="timeline-text">コロナ禍を乗り越え、オンラインを活用した新しい活動形式を開拓。移住促進や関係人口増加に向けた事業にも取り組んでいます。</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">現在</div>
+          <div class="timeline-title">さらなる未来へ</div>
+          <p class="timeline-text">30名のメンバーが島の未来を信じ、今日も活動を続けています。新しいメンバーと共に、隠岐の新しい章を刻んでいきます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 入会CTA -->
+  <section style="background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:80px 24px;text-align:center;">
+    <div style="position:relative;">
+      <p style="color:rgba(255,255,255,0.8);font-size:14px;letter-spacing:2px;margin-bottom:12px;">JOIN US</p>
+      <h2 style="font-size:clamp(24px,4vw,36px);font-weight:900;color:white;margin-bottom:16px;">あなたも隠岐JCの仲間に</h2>
+      <p style="color:rgba(255,255,255,0.8);font-size:15px;margin-bottom:32px;">20歳〜40歳の方を広く募集しています。まずはお気軽にご連絡ください。</p>
+      <a href="join.html" class="btn btn-accent">入会案内を見る →</a>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-icon">OKI<br>JC</div>
+        <div class="footer-logo-text">
+          <div class="org-name">隠岐青年会議所</div>
+          <div class="org-sub">OKI JUNIOR CHAMBER</div>
+        </div>
+      </div>
+      <p class="footer-desc">島根県隠岐郡に根ざした青年団体として、地域の未来づくりと自己成長に取り組んでいます。<br>〒685-0000 島根県隠岐郡隠岐の島町○○○</p>
+      <a href="#" target="_blank" rel="noopener" class="footer-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+    <div class="footer-nav">
+      <h4>組織について</h4>
+      <ul>
+        <li><a href="about.html">JCについて</a></li>
+        <li><a href="members.html">メンバー紹介</a></li>
+        <li><a href="national-jc.html">全国JC活動</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>活動・情報</h4>
+      <ul>
+        <li><a href="activities.html">活動・事業</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="oki-info.html">隠岐の魅力</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>参加・支援</h4>
+      <ul>
+        <li><a href="join.html">入会案内</a></li>
+        <li><a href="sponsor.html">スポンサー募集</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 隠岐青年会議所. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

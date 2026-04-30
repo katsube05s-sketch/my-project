@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全国JC活動紹介 | 隠岐青年会議所</title>
+  <meta name="description" content="全国の青年会議所の取り組みや連携をご紹介します。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .jci-hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 80px 24px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .jci-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(0,180,216,0.1) 0%, transparent 70%);
+    }
+    .globe-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+    .jci-hero h2 { font-size: clamp(28px,5vw,48px); font-weight: 900; margin-bottom: 16px; position: relative; }
+    .jci-hero p { font-size: 16px; opacity: 0.8; max-width: 600px; margin: 0 auto; position: relative; line-height: 1.9; }
+
+    /* 階層 */
+    .hierarchy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    .hierarchy-level {
+      width: 100%;
+      max-width: 700px;
+    }
+    .hierarchy-box {
+      padding: 20px 32px;
+      border-radius: 12px;
+      text-align: center;
+      position: relative;
+    }
+    .hierarchy-box.jci {
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      color: white;
+    }
+    .hierarchy-box.japan {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+    }
+    .hierarchy-box.block {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+    .hierarchy-box.oki {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+    }
+    .hierarchy-box h4 { font-size: 18px; font-weight: 900; margin-bottom: 4px; }
+    .hierarchy-box p { font-size: 13px; opacity: 0.85; }
+    .hierarchy-arrow {
+      text-align: center;
+      font-size: 24px;
+      color: var(--gray);
+      padding: 8px 0;
+    }
+
+    /* ネットワークカード */
+    .network-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .network-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-top: 4px solid var(--primary);
+    }
+    .network-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .network-card-icon { font-size: 36px; margin-bottom: 12px; }
+    .network-card h4 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+    .network-card p { font-size: 14px; color: var(--gray); line-height: 1.8; }
+
+    /* 他JC取り組み */
+    .jc-cases {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+    .jc-case-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .jc-case-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .jc-case-card img { width: 100%; height: 180px; object-fit: cover; }
+    .jc-case-body { padding: 20px 24px; }
+    .jc-location { font-size: 12px; color: var(--gray); margin-bottom: 6px; }
+    .jc-case-title { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .jc-case-text { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+    /* 全国大会 */
+    .conf-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .conf-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+    }
+    .conf-card:hover { transform: translateY(-4px); }
+    .conf-card .year { font-size: 32px; font-weight: 900; color: var(--primary); }
+    .conf-card h4 { font-size: 16px; font-weight: 700; color: var(--dark); margin: 8px 0; }
+    .conf-card p { font-size: 13px; color: var(--gray); line-height: 1.7; }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .network-cards { grid-template-columns: 1fr; }
+      .jc-cases { grid-template-columns: 1fr; }
+      .conf-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <div class="header-logo-icon">OKI<br>JC</div>
+      <div class="header-logo-text">
+        <span class="org-name">隠岐青年会議所</span>
+        <span class="org-sub">OKI JUNIOR CHAMBER</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="about.html">JCについて</a>
+      <a href="activities.html">活動・事業</a>
+      <a href="news.html">お知らせ</a>
+      <a href="oki-info.html">隠岐の魅力</a>
+      <a href="sponsor.html">スポンサー</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" target="_blank" rel="noopener" class="header-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="join.html" class="header-join-btn">入会案内</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">🏠 ホーム</a>
+  <a href="about.html">📖 JCについて</a>
+  <a href="members.html">👥 メンバー紹介</a>
+  <a href="activities.html">🎯 活動・事業</a>
+  <a href="news.html">📢 お知らせ</a>
+  <a href="oki-info.html">🏝️ 隠岐の魅力</a>
+  <a href="national-jc.html">🗾 全国JC活動</a>
+  <a href="sponsor.html">🤝 スポンサー募集</a>
+  <a href="join.html">✨ 入会案内</a>
+  <a href="#" target="_blank" rel="noopener" class="mobile-instagram">📷 Instagram をフォロー</a>
+</nav>
+
+<div class="page-content">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="index.html">ホーム</a>
+      <span>›</span>
+      <span>全国JC活動紹介</span>
+    </div>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-tag">NATIONAL JC</div>
+    <h1>全国JC活動紹介</h1>
+    <p>日本全国・世界のJCネットワークとの連携をご紹介します</p>
+  </section>
+
+  <!-- JCI階層 -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">NETWORK</div>
+        <h2 class="section-title">JCの<span>ネットワーク構造</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">隠岐JCは国際・全国・地区のJCネットワークに参加しています。</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;" class="fade-in">
+        <div class="hierarchy">
+          <div class="hierarchy-level">
+            <div class="hierarchy-box jci">
+              <h4>🌍 JCI（国際青年会議所）</h4>
+              <p>120か国以上・約20万人のメンバー</p>
+            </div>
+          </div>
+          <div class="hierarchy-arrow">↓</div>
+          <div class="hierarchy-level">
+            <div class="hierarchy-box japan">
+              <h4>🗾 公益社団法人 日本青年会議所</h4>
+              <p>国内700以上のJC・約3万人のメンバー</p>
+            </div>
+          </div>
+          <div class="hierarchy-arrow">↓</div>
+          <div class="hierarchy-level">
+            <div class="hierarchy-box block">
+              <h4>🏯 中国地区（島根ブロック）</h4>
+              <p>中四国地区協議会・島根ブロック協議会</p>
+            </div>
+          </div>
+          <div class="hierarchy-arrow">↓</div>
+          <div class="hierarchy-level">
+            <div class="hierarchy-box oki">
+              <h4>🏝️ 隠岐青年会議所</h4>
+              <p>島根県隠岐郡・30名のメンバー</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-tag">MERIT</div>
+          <h3 style="font-size:22px;font-weight:900;color:var(--dark);margin:12px 0 16px;">ネットワークに参加するメリット</h3>
+          <div class="icon-list">
+            <div class="icon-list-item">
+              <div class="icon-list-icon">🤝</div>
+              <div class="icon-list-body">
+                <h4>全国700以上のJCとの交流</h4>
+                <p>全国各地の同世代青年リーダーとのネットワークが広がります。ビジネスや人生の財産となる仲間ができます。</p>
+              </div>
+            </div>
+            <div class="icon-list-item">
+              <div class="icon-list-icon">📚</div>
+              <div class="icon-list-body">
+                <h4>全国規模の研修・大会参加</h4>
+                <p>全国大会・地区大会への参加を通じて、全国水準のスキルと視野を身につけることができます。</p>
+              </div>
+            </div>
+            <div class="icon-list-item">
+              <div class="icon-list-icon">🌐</div>
+              <div class="icon-list-body">
+                <h4>国際交流の機会</h4>
+                <p>JCIを通じて120か国以上の青年との交流も可能。隠岐から世界へつながるネットワークです。</p>
+              </div>
+            </div>
+            <div class="icon-list-item">
+              <div class="icon-list-icon">💡</div>
+              <div class="icon-list-body">
+                <h4>先進事例の共有</h4>
+                <p>全国のJCが取り組む先進的な地域づくり事例を学び、隠岐の活動に活かすことができます。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 全国JCの取り組み事例 -->
+  <section class="section" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">CASE STUDIES</div>
+        <h2 class="section-title">全国JCの<span>注目取り組み</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">全国各地のJCが取り組む先進的な活動を隠岐の活動に活かしています。</p>
+      </div>
+      <div class="jc-cases">
+        <div class="jc-case-card fade-in">
+          <img src="https://picsum.photos/seed/jc-case01/600/180" alt="離島JCネットワーク">
+          <div class="jc-case-body">
+            <div class="jc-location">📍 全国離島JCネットワーク</div>
+            <div class="jc-case-title">離島が連携！全国離島JC連絡協議会</div>
+            <p class="jc-case-text">全国の離島を拠点とするJCが連携し、共通課題（過疎化・移住促進・観光振興）に協力して取り組む全国ネットワーク。隠岐JCも積極的に参加しています。</p>
+          </div>
+        </div>
+        <div class="jc-case-card fade-in">
+          <img src="https://picsum.photos/seed/jc-case02/600/180" alt="地方創生">
+          <div class="jc-case-body">
+            <div class="jc-location">📍 島根ブロック協議会</div>
+            <div class="jc-case-title">島根発！地方創生モデル事業</div>
+            <p class="jc-case-text">島根ブロックの各JCが連携し、県内の地方創生に向けた事業を展開。隠岐JCの取り組みが島根全体のモデルケースとして注目されています。</p>
+          </div>
+        </div>
+        <div class="jc-case-card fade-in">
+          <img src="https://picsum.photos/seed/jc-case03/600/180" alt="教育改革">
+          <div class="jc-case-body">
+            <div class="jc-location">📍 全国JC 青少年育成委員会</div>
+            <div class="jc-case-title">全国で広がる次世代育成プログラム</div>
+            <p class="jc-case-text">JCの青少年育成プログラムは全国で展開。海士町の「高校魅力化プロジェクト」に代表される隠岐発の教育改革が全国から視察を集めています。</p>
+          </div>
+        </div>
+        <div class="jc-case-card fade-in">
+          <img src="https://picsum.photos/seed/jc-case04/600/180" alt="国際交流">
+          <div class="jc-case-body">
+            <div class="jc-location">📍 JCI 国際交流事業</div>
+            <div class="jc-case-title">アジア太平洋地区との青年交流</div>
+            <p class="jc-case-text">JCIのアジア太平洋地区会議への参加を通じて、韓国・中国・東南アジアの青年とのネットワークを構築。国際的な視野で隠岐の未来を考えています。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 全国大会参加 -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">CONFERENCES</div>
+        <h2 class="section-title">全国・地区<span>大会への参加</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="conf-grid">
+        <div class="conf-card fade-in">
+          <div class="year">全国</div>
+          <h4>全国会員大会・全国大会</h4>
+          <p>毎年秋に開催される全国大会に参加。全国のJCメンバーとの交流と最新の取り組みを学びます。</p>
+        </div>
+        <div class="conf-card fade-in">
+          <div class="year">地区</div>
+          <h4>中国地区大会・島根ブロック大会</h4>
+          <p>中国地区・島根ブロックの仲間たちと共に取り組む地区大会に毎年参加しています。</p>
+        </div>
+        <div class="conf-card fade-in">
+          <div class="year">国際</div>
+          <h4>JCI アジア太平洋大会</h4>
+          <p>隠岐の代表として国際大会にも積極的に参加。グローバルな視点を持ったリーダーを育成します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 連携JC紹介 -->
+  <section class="section" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">PARTNERS</div>
+        <h2 class="section-title">連携する<span>青年会議所</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="table-wrap fade-in">
+        <table>
+          <thead>
+            <tr><th>JC名</th><th>所在地</th><th>連携テーマ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>松江青年会議所</strong></td><td>島根県松江市</td><td>地域活性化・観光振興の情報交換</td></tr>
+            <tr><td><strong>出雲青年会議所</strong></td><td>島根県出雲市</td><td>神話・伝統文化の発信連携</td></tr>
+            <tr><td><strong>益田青年会議所</strong></td><td>島根県益田市</td><td>中山間地域・過疎化対策の共同研究</td></tr>
+            <tr><td><strong>対馬青年会議所</strong></td><td>長崎県対馬市</td><td>離島共通課題への協働アプローチ</td></tr>
+            <tr><td><strong>壱岐青年会議所</strong></td><td>長崎県壱岐市</td><td>離島観光・ジオパーク交流</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-icon">OKI<br>JC</div>
+        <div class="footer-logo-text">
+          <div class="org-name">隠岐青年会議所</div>
+          <div class="org-sub">OKI JUNIOR CHAMBER</div>
+        </div>
+      </div>
+      <p class="footer-desc">島根県隠岐郡に根ざした青年団体として、地域の未来づくりと自己成長に取り組んでいます。<br>〒685-0000 島根県隠岐郡隠岐の島町○○○</p>
+      <a href="#" target="_blank" rel="noopener" class="footer-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+    <div class="footer-nav">
+      <h4>組織について</h4>
+      <ul>
+        <li><a href="about.html">JCについて</a></li>
+        <li><a href="members.html">メンバー紹介</a></li>
+        <li><a href="national-jc.html">全国JC活動</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>活動・情報</h4>
+      <ul>
+        <li><a href="activities.html">活動・事業</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="oki-info.html">隠岐の魅力</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>参加・支援</h4>
+      <ul>
+        <li><a href="join.html">入会案内</a></li>
+        <li><a href="sponsor.html">スポンサー募集</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 隠岐青年会議所. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活動・事業 | 隠岐青年会議所</title>
+  <meta name="description" content="隠岐青年会議所の年間活動報告・事業紹介です。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .activity-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 2px solid var(--gray-light);
+      background: white;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      color: var(--gray);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .activity-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .activity-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .activity-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .activity-card-body { padding: 20px 24px; }
+    .activity-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .activity-date { font-size: 12px; color: var(--gray); }
+    .activity-card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .activity-card-text {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* 年間カレンダー */
+    .annual-table { background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); }
+
+    /* フォトギャラリー */
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .photo-gallery .photo {
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+    .photo-gallery .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .photo-gallery .photo:hover img { transform: scale(1.05); }
+    .photo-gallery .photo.large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    /* 注目事業 */
+    .featured-activity {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+      margin-bottom: 32px;
+    }
+    .featured-activity img {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      object-fit: cover;
+    }
+    .featured-activity-body {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      padding: 48px 40px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .featured-activity-body .tag {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .featured-activity-body h3 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .featured-activity-body p {
+      font-size: 14px;
+      opacity: 0.85;
+      line-height: 1.9;
+    }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) { .photo-gallery { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) {
+      .activity-grid { grid-template-columns: 1fr; }
+      .featured-activity { grid-template-columns: 1fr; }
+      .featured-activity img { min-height: 200px; }
+      .photo-gallery { grid-template-columns: repeat(2, 1fr); }
+      .photo-gallery .photo.large { grid-column: span 1; grid-row: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <div class="header-logo-icon">OKI<br>JC</div>
+      <div class="header-logo-text">
+        <span class="org-name">隠岐青年会議所</span>
+        <span class="org-sub">OKI JUNIOR CHAMBER</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="about.html">JCについて</a>
+      <a href="activities.html" class="active">活動・事業</a>
+      <a href="news.html">お知らせ</a>
+      <a href="oki-info.html">隠岐の魅力</a>
+      <a href="sponsor.html">スポンサー</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" target="_blank" rel="noopener" class="header-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="join.html" class="header-join-btn">入会案内</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">🏠 ホーム</a>
+  <a href="about.html">📖 JCについて</a>
+  <a href="members.html">👥 メンバー紹介</a>
+  <a href="activities.html">🎯 活動・事業</a>
+  <a href="news.html">📢 お知らせ</a>
+  <a href="oki-info.html">🏝️ 隠岐の魅力</a>
+  <a href="national-jc.html">🗾 全国JC活動</a>
+  <a href="sponsor.html">🤝 スポンサー募集</a>
+  <a href="join.html">✨ 入会案内</a>
+  <a href="#" target="_blank" rel="noopener" class="mobile-instagram">📷 Instagram をフォロー</a>
+</nav>
+
+<div class="page-content">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="index.html">ホーム</a>
+      <span>›</span>
+      <span>活動・事業</span>
+    </div>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-tag">ACTIVITIES</div>
+    <h1>活動・事業</h1>
+    <p>地域づくり・青少年育成・環境保全など、年間を通じて多彩な活動を展開しています</p>
+  </section>
+
+  <!-- 注目事業 -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">FEATURED</div>
+        <h2 class="section-title">注目の<span>事業</span></h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="featured-activity fade-in">
+        <img src="https://picsum.photos/seed/oki-festival/700/400" alt="隠岐の魅力発信フェスティバル">
+        <div class="featured-activity-body">
+          <span class="tag">地域創造</span>
+          <h3>隠岐の魅力発信<br>フェスティバル 2026</h3>
+          <p>
+            島の食・文化・自然を一堂に集めた体験型イベント。
+            地元住民はもちろん、観光客や移住希望者も楽しめる
+            隠岐最大級の地域活性化イベントです。
+            毎年5,000名以上が参加する一大イベントに成長しました。
+          </p>
+        </div>
+      </div>
+
+      <div class="featured-activity fade-in" style="direction:rtl;">
+        <img src="https://picsum.photos/seed/oki-kids/700/400" alt="子ども夢体験プログラム">
+        <div class="featured-activity-body" style="direction:ltr;background:linear-gradient(135deg,var(--accent),#f4a261);">
+          <span class="tag">青少年育成</span>
+          <h3>子ども夢体験<br>プログラム</h3>
+          <p>
+            島の子どもたちが様々な職業や体験を通じて夢を見つける
+            年間通じたプログラム。漁業・農業・IT・アートなど
+            多彩な体験機会を提供し、島の将来を担う人材を育成します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 活動一覧 -->
+  <section class="section" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">ALL ACTIVITIES</div>
+        <h2 class="section-title">2026年度<span>活動一覧</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="activity-filter fade-in">
+        <button class="filter-btn active">すべて</button>
+        <button class="filter-btn">地域づくり</button>
+        <button class="filter-btn">青少年育成</button>
+        <button class="filter-btn">環境保全</button>
+        <button class="filter-btn">研修・自己啓発</button>
+        <button class="filter-btn">国際交流</button>
+      </div>
+      <div class="activity-grid">
+        <div class="activity-card fade-in">
+          <img class="activity-card-img" src="https://picsum.photos/seed/act01/600/300" alt="新年互礼会">
+          <div class="activity-card-body">
+            <div class="activity-card-meta">
+              <span class="badge badge-blue">研修</span>
+              <span class="activity-date">2026年1月</span>
+            </div>
+            <div class="activity-card-title">新年互礼会・新年度方針発表会</div>
+            <p class="activity-card-text">新年のスタートとして、地域の皆さまと新年度の方針を共有する互礼会を開催しました。</p>
+          </div>
+        </div>
+        <div class="activity-card fade-in">
+          <img class="activity-card-img" src="https://picsum.photos/seed/act02/600/300" alt="海岸清掃">
+          <div class="activity-card-body">
+            <div class="activity-card-meta">
+              <span class="badge badge-green">環境保全</span>
+              <span class="activity-date">2026年3月</span>
+            </div>
+            <div class="activity-card-title">春の海岸一斉清掃活動</div>
+            <p class="activity-card-text">島内全域の海岸を一斉清掃。地域住民・学校・企業と連携し100名以上が参加しました。</p>
+          </div>
+        </div>
+        <div class="activity-card fade-in">
+          <img class="activity-card-img" src="https://picsum.photos/seed/act03/600/300" alt="通常総会">
+          <div class="activity-card-body">
+            <div class="activity-card-meta">
+              <span class="badge badge-purple">組織運営</span>
+              <span class="activity-date">2026年4月</span>
+            </div>
+            <div class="activity-card-title">通常総会・新入会員歓迎会</div>
+            <p class="activity-card-text">年度の活動計画を確定する通常総会と、新しいメンバーを迎える歓迎会を開催しました。</p>
+          </div>
+        </div>
+        <div class="activity-card fade-in">
+          <img class="activity-card-img" src="https://picsum.photos/seed/act04/600/300" alt="子ども体験">
+          <div class="activity-card-body">
+            <div class="activity-card-meta">
+              <span class="badge badge-orange">青少年育成</span>
+              <span class="activity-date">2026年5月</span>
+            </div>
+            <div class="activity-card-title">子ども漁業体験プログラム</div>
+            <p class="activity-card-text">島の漁師さんと一緒に漁を体験。海の恵みと漁師の仕事について学ぶ体験型プログラムです。</p>
+          </div>
+        </div>
+        <div class="activity-card fade-in">
+          <img class="activity-card-img" src="https://picsum.photos/seed/act05/600/300" alt="移住促進">
+          <div class="activity-card-body">
+            <div class="activity-card-meta">
+              <span class="badge badge-blue">地域づくり</span>
+              <span class="activity-date">2026年6月</span>
+            </div>
+            <div class="activity-card-title">隠岐移住・関係人口促進フォーラム</div>
+            <p class="activity-card-text">島への移住を検討する方々を対象にしたフォーラムを開催。島の魅力と暮らしを紹介しました。</p>
+          </div>
+        </div>
+        <div class="activity-card fade-in">
+          <img class="activity-card-img" src="https://picsum.photos/seed/act06/600/300" alt="地域フェス">
+          <div class="activity-card-body">
+            <div class="activity-card-meta">
+              <span class="badge badge-orange">地域づくり</span>
+              <span class="activity-date">2026年8月</span>
+            </div>
+            <div class="activity-card-title">隠岐の魅力発信フェスティバル</div>
+            <p class="activity-card-text">島の食・文化・自然を体験できる最大規模のイベント。今年も5,000名以上の来場を目指します。</p>
+          </div>
+        </div>
+        <div class="activity-card fade-in">
+          <img class="activity-card-img" src="https://picsum.photos/seed/act07/600/300" alt="ジオパーク">
+          <div class="activity-card-body">
+            <div class="activity-card-meta">
+              <span class="badge badge-green">環境保全</span>
+              <span class="activity-date">2026年9月</span>
+            </div>
+            <div class="activity-card-title">世界ジオパーク環境教育ツアー</div>
+            <p class="activity-card-text">隠岐ユネスコ世界ジオパークの価値を学ぶツアーを実施。次世代への環境意識醸成を目指します。</p>
+          </div>
+        </div>
+        <div class="activity-card fade-in">
+          <img class="activity-card-img" src="https://picsum.photos/seed/act08/600/300" alt="交流大会">
+          <div class="activity-card-body">
+            <div class="activity-card-meta">
+              <span class="badge badge-purple">国際交流</span>
+              <span class="activity-date">2026年10月</span>
+            </div>
+            <div class="activity-card-title">中四国地区JC交流大会参加</div>
+            <p class="activity-card-text">中四国地区の青年会議所メンバーとの交流大会に参加。他地域との連携を深めます。</p>
+          </div>
+        </div>
+        <div class="activity-card fade-in">
+          <img class="activity-card-img" src="https://picsum.photos/seed/act09/600/300" alt="年末事業">
+          <div class="activity-card-body">
+            <div class="activity-card-meta">
+              <span class="badge badge-blue">地域づくり</span>
+              <span class="activity-date">2026年12月</span>
+            </div>
+            <div class="activity-card-title">年末ふれあいボランティア活動</div>
+            <p class="activity-card-text">年末に地域の高齢者施設や子ども施設を訪問するボランティア活動を行います。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 年間カレンダー -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">CALENDAR</div>
+        <h2 class="section-title">年間<span>活動カレンダー</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="table-wrap fade-in">
+        <table>
+          <thead>
+            <tr><th>月</th><th>主な活動・事業</th><th>カテゴリ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1月</strong></td><td>新年互礼会・新年度方針発表</td><td><span class="badge badge-blue">研修</span></td></tr>
+            <tr><td><strong>2月</strong></td><td>スキルアップ研修会・委員会合同会議</td><td><span class="badge badge-purple">研修</span></td></tr>
+            <tr><td><strong>3月</strong></td><td>春の海岸一斉清掃活動</td><td><span class="badge badge-green">環境</span></td></tr>
+            <tr><td><strong>4月</strong></td><td>通常総会・新入会員歓迎会</td><td><span class="badge badge-purple">組織</span></td></tr>
+            <tr><td><strong>5月</strong></td><td>子ども漁業体験プログラム</td><td><span class="badge badge-orange">育成</span></td></tr>
+            <tr><td><strong>6月</strong></td><td>移住・関係人口促進フォーラム</td><td><span class="badge badge-blue">地域</span></td></tr>
+            <tr><td><strong>7月</strong></td><td>夏休み子どもプログラム</td><td><span class="badge badge-orange">育成</span></td></tr>
+            <tr><td><strong>8月</strong></td><td>隠岐の魅力発信フェスティバル</td><td><span class="badge badge-orange">地域</span></td></tr>
+            <tr><td><strong>9月</strong></td><td>世界ジオパーク環境教育ツアー</td><td><span class="badge badge-green">環境</span></td></tr>
+            <tr><td><strong>10月</strong></td><td>中四国地区JC交流大会・島根ブロック大会</td><td><span class="badge badge-purple">交流</span></td></tr>
+            <tr><td><strong>11月</strong></td><td>年度末総括事業・表彰式</td><td><span class="badge badge-blue">組織</span></td></tr>
+            <tr><td><strong>12月</strong></td><td>年末ボランティア活動・年次大会</td><td><span class="badge badge-orange">地域</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- フォトギャラリー -->
+  <section class="section" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">PHOTO GALLERY</div>
+        <h2 class="section-title">活動<span>フォトギャラリー</span></h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="photo-gallery fade-in">
+        <div class="photo large">
+          <img src="https://picsum.photos/seed/gallery01/600/600" alt="活動写真1">
+        </div>
+        <div class="photo">
+          <img src="https://picsum.photos/seed/gallery02/300/300" alt="活動写真2">
+        </div>
+        <div class="photo">
+          <img src="https://picsum.photos/seed/gallery03/300/300" alt="活動写真3">
+        </div>
+        <div class="photo">
+          <img src="https://picsum.photos/seed/gallery04/300/300" alt="活動写真4">
+        </div>
+        <div class="photo">
+          <img src="https://picsum.photos/seed/gallery05/300/300" alt="活動写真5">
+        </div>
+        <div class="photo">
+          <img src="https://picsum.photos/seed/gallery06/300/300" alt="活動写真6">
+        </div>
+        <div class="photo">
+          <img src="https://picsum.photos/seed/gallery07/300/300" alt="活動写真7">
+        </div>
+        <div class="photo">
+          <img src="https://picsum.photos/seed/gallery08/300/300" alt="活動写真8">
+        </div>
+      </div>
+      <div class="btn-center fade-in">
+        <a href="#" target="_blank" rel="noopener" class="btn btn-primary">Instagramで写真をもっと見る</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-icon">OKI<br>JC</div>
+        <div class="footer-logo-text">
+          <div class="org-name">隠岐青年会議所</div>
+          <div class="org-sub">OKI JUNIOR CHAMBER</div>
+        </div>
+      </div>
+      <p class="footer-desc">島根県隠岐郡に根ざした青年団体として、地域の未来づくりと自己成長に取り組んでいます。<br>〒685-0000 島根県隠岐郡隠岐の島町○○○</p>
+      <a href="#" target="_blank" rel="noopener" class="footer-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+    <div class="footer-nav">
+      <h4>組織について</h4>
+      <ul>
+        <li><a href="about.html">JCについて</a></li>
+        <li><a href="members.html">メンバー紹介</a></li>
+        <li><a href="national-jc.html">全国JC活動</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>活動・情報</h4>
+      <ul>
+        <li><a href="activities.html">活動・事業</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="oki-info.html">隠岐の魅力</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>参加・支援</h4>
+      <ul>
+        <li><a href="join.html">入会案内</a></li>
+        <li><a href="sponsor.html">スポンサー募集</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 隠岐青年会議所. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

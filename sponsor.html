@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スポンサー募集 | 隠岐青年会議所</title>
+  <meta name="description" content="隠岐青年会議所の活動スポンサーを募集しています。地域貢献と企業PRを兼ねたご支援をお待ちしています。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* スポンサーティア */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+    .tier-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      position: relative;
+      transition: var(--transition);
+    }
+    .tier-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .tier-card.recommended {
+      border: 3px solid var(--primary);
+      transform: scale(1.03);
+    }
+    .tier-card.recommended:hover { transform: scale(1.03) translateY(-4px); }
+    .recommended-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 4px 20px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .tier-icon { font-size: 48px; margin-bottom: 12px; }
+    .tier-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .tier-name-en {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+    .tier-price {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+    .tier-price span { font-size: 18px; }
+    .tier-unit { font-size: 13px; color: var(--gray); margin-bottom: 24px; }
+    .tier-divider { height: 1px; background: var(--gray-light); margin: 20px 0; }
+    .tier-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+    .tier-features li {
+      padding: 8px 0;
+      font-size: 14px;
+      color: var(--text);
+      border-bottom: 1px solid var(--bg);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .tier-features li::before {
+      content: '✓';
+      color: var(--primary);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .tier-features li.na {
+      color: var(--gray);
+      opacity: 0.5;
+    }
+    .tier-features li.na::before { content: '–'; color: var(--gray); }
+
+    /* メリット一覧 */
+    .merit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .merit-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .merit-icon-wrap {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, var(--bg), rgba(0,180,216,0.1));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .merit-body h4 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+    .merit-body p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+    /* 申し込みフォーム */
+    .form-wrap {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: var(--shadow);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* スポンサー一覧 */
+    .sponsor-logos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .sponsor-logo-box {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 2/1;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray);
+      text-align: center;
+    }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      .tier-grid { grid-template-columns: 1fr; }
+      .tier-card.recommended { transform: scale(1); }
+      .merit-grid { grid-template-columns: 1fr; }
+      .form-wrap { padding: 28px 20px; }
+      .sponsor-logos { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <div class="header-logo-icon">OKI<br>JC</div>
+      <div class="header-logo-text">
+        <span class="org-name">隠岐青年会議所</span>
+        <span class="org-sub">OKI JUNIOR CHAMBER</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="about.html">JCについて</a>
+      <a href="activities.html">活動・事業</a>
+      <a href="news.html">お知らせ</a>
+      <a href="oki-info.html">隠岐の魅力</a>
+      <a href="sponsor.html" class="active">スポンサー</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" target="_blank" rel="noopener" class="header-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="join.html" class="header-join-btn">入会案内</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">🏠 ホーム</a>
+  <a href="about.html">📖 JCについて</a>
+  <a href="members.html">👥 メンバー紹介</a>
+  <a href="activities.html">🎯 活動・事業</a>
+  <a href="news.html">📢 お知らせ</a>
+  <a href="oki-info.html">🏝️ 隠岐の魅力</a>
+  <a href="national-jc.html">🗾 全国JC活動</a>
+  <a href="sponsor.html">🤝 スポンサー募集</a>
+  <a href="join.html">✨ 入会案内</a>
+  <a href="#" target="_blank" rel="noopener" class="mobile-instagram">📷 Instagram をフォロー</a>
+</nav>
+
+<div class="page-content">
+  <div class="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="index.html">ホーム</a>
+      <span>›</span>
+      <span>スポンサー募集</span>
+    </div>
+  </div>
+
+  <section class="page-hero">
+    <div class="page-hero-tag">SPONSOR</div>
+    <h1>スポンサー募集</h1>
+    <p>隠岐の未来づくりを、あなたの企業・団体のご支援で一緒に実現しましょう</p>
+  </section>
+
+  <!-- スポンサーになる意義 -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">WHY SPONSOR</div>
+        <h2 class="section-title">スポンサーになる<span>メリット</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">地域社会への貢献と企業ブランドの向上を同時に実現できます。</p>
+      </div>
+      <div class="merit-grid">
+        <div class="merit-card fade-in">
+          <div class="merit-icon-wrap">📣</div>
+          <div class="merit-body">
+            <h4>地域への露出・PR効果</h4>
+            <p>各種イベント（年間来場5,000名以上）や印刷物、ウェブサイトへのロゴ掲載を通じて、企業・団体名を地域全体にPRできます。</p>
+          </div>
+        </div>
+        <div class="merit-card fade-in">
+          <div class="merit-icon-wrap">🏆</div>
+          <div class="merit-body">
+            <h4>CSR・地域貢献活動の実績</h4>
+            <p>地域の青少年育成・環境保全・地域活性化に貢献することで、企業の社会的責任（CSR）活動の実績となります。</p>
+          </div>
+        </div>
+        <div class="merit-card fade-in">
+          <div class="merit-icon-wrap">🤝</div>
+          <div class="merit-body">
+            <h4>地域ネットワークの拡大</h4>
+            <p>JCメンバー・地域企業・行政・全国JCネットワークとのつながりを得ることで、ビジネスチャンスの創出にもつながります。</p>
+          </div>
+        </div>
+        <div class="merit-card fade-in">
+          <div class="merit-icon-wrap">📱</div>
+          <div class="merit-body">
+            <h4>SNS・デジタルでの情報発信</h4>
+            <p>InstagramをはじめとするSNSでの協賛企業ご紹介や、公式ウェブサイトへのリンク掲載により、デジタル上のPRも行います。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- スポンサーティア -->
+  <section class="section" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">PLAN</div>
+        <h2 class="section-title">協賛<span>プラン</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">3つのプランからお選びいただけます。</p>
+      </div>
+      <div class="tier-grid">
+        <!-- シルバー -->
+        <div class="tier-card fade-in">
+          <div class="tier-icon">🥈</div>
+          <div class="tier-name">シルバー</div>
+          <div class="tier-name-en">SILVER</div>
+          <div class="tier-price">¥30,000<span>〜</span></div>
+          <div class="tier-unit">/ 年間（税込）</div>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li>ウェブサイトへのロゴ掲載</li>
+            <li>年間活動報告書への掲載</li>
+            <li>活動ご案内の送付</li>
+            <li class="na">イベント会場でのロゴ掲示</li>
+            <li class="na">SNSでの企業紹介</li>
+            <li class="na">懸垂幕・横断幕への掲載</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline" style="width:100%;justify-content:center;">申し込む</a>
+        </div>
+        <!-- ゴールド（おすすめ） -->
+        <div class="tier-card recommended fade-in">
+          <div class="recommended-badge">⭐ おすすめ</div>
+          <div class="tier-icon">🥇</div>
+          <div class="tier-name">ゴールド</div>
+          <div class="tier-name-en">GOLD</div>
+          <div class="tier-price">¥100,000<span>〜</span></div>
+          <div class="tier-unit">/ 年間（税込）</div>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li>ウェブサイトへのロゴ掲載（目立つ位置）</li>
+            <li>年間活動報告書への掲載</li>
+            <li>活動ご案内の送付</li>
+            <li>イベント会場でのロゴ掲示</li>
+            <li>SNSでの企業紹介（年2回）</li>
+            <li class="na">懸垂幕・横断幕への掲載</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">申し込む</a>
+        </div>
+        <!-- プラチナ -->
+        <div class="tier-card fade-in">
+          <div class="tier-icon">💎</div>
+          <div class="tier-name">プラチナ</div>
+          <div class="tier-name-en">PLATINUM</div>
+          <div class="tier-price">¥300,000<span>〜</span></div>
+          <div class="tier-unit">/ 年間（税込）</div>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li>ウェブサイトへのロゴ掲載（最上位表示）</li>
+            <li>年間活動報告書への掲載（1ページ）</li>
+            <li>活動ご案内の送付</li>
+            <li>イベント会場でのロゴ掲示（大型）</li>
+            <li>SNSでの企業紹介（年4回）</li>
+            <li>懸垂幕・横断幕への掲載</li>
+          </ul>
+          <a href="#contact" class="btn btn-accent" style="width:100%;justify-content:center;">申し込む</a>
+        </div>
+      </div>
+      <div class="highlight-box fade-in" style="margin-top:40px;">
+        <p>※ 事業単位でのスポット協賛も受け付けております。内容・金額はご相談ください。<br>
+        ※ 上記プランは目安です。ご予算・ご要望に応じてカスタマイズいたします。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 現在のスポンサー -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">OUR SPONSORS</div>
+        <h2 class="section-title">2026年度<span>協賛企業・団体</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">温かいご支援をいただいている皆さまです。（ダミー）</p>
+      </div>
+      <div class="sponsor-logos fade-in">
+        <div class="sponsor-logo-box">○○商事<br>株式会社</div>
+        <div class="sponsor-logo-box">隠岐信用<br>金庫</div>
+        <div class="sponsor-logo-box">○○建設<br>株式会社</div>
+        <div class="sponsor-logo-box">△△観光<br>有限会社</div>
+        <div class="sponsor-logo-box">□□水産<br>株式会社</div>
+        <div class="sponsor-logo-box">○○農協</div>
+        <div class="sponsor-logo-box">隠岐ガス<br>株式会社</div>
+        <div class="sponsor-logo-box">○○電気<br>工事</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 申し込みフォーム -->
+  <section class="section" id="contact" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="section-tag">APPLY</div>
+        <h2 class="section-title">協賛<span>申し込み・お問い合わせ</span></h2>
+        <div class="section-divider"></div>
+        <p class="section-desc">下記フォームよりお気軽にお問い合わせください。担当者よりご連絡いたします。</p>
+      </div>
+      <div class="form-wrap fade-in">
+        <form>
+          <div class="form-group">
+            <label class="form-label">企業・団体名 <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="例：○○株式会社">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+            <div class="form-group">
+              <label class="form-label">ご担当者名 <span class="required">*</span></label>
+              <input type="text" class="form-input" placeholder="例：山田 太郎">
+            </div>
+            <div class="form-group">
+              <label class="form-label">ご担当者名（フリガナ）</label>
+              <input type="text" class="form-input" placeholder="例：ヤマダ タロウ">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+            <div class="form-group">
+              <label class="form-label">メールアドレス <span class="required">*</span></label>
+              <input type="email" class="form-input" placeholder="例：info@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">電話番号 <span class="required">*</span></label>
+              <input type="tel" class="form-input" placeholder="例：08512-0-0000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">ご希望のプラン</label>
+            <select class="form-select">
+              <option value="">プランを選択してください</option>
+              <option>シルバー（¥30,000〜）</option>
+              <option>ゴールド（¥100,000〜）</option>
+              <option>プラチナ（¥300,000〜）</option>
+              <option>スポット協賛（相談）</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">お問い合わせ内容</label>
+            <textarea class="form-textarea" placeholder="ご質問・ご要望などがあればご記入ください。"></textarea>
+          </div>
+          <div style="text-align:center;">
+            <button type="submit" class="btn btn-primary" style="min-width:240px;">送信する</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-icon">OKI<br>JC</div>
+        <div class="footer-logo-text">
+          <div class="org-name">隠岐青年会議所</div>
+          <div class="org-sub">OKI JUNIOR CHAMBER</div>
+        </div>
+      </div>
+      <p class="footer-desc">島根県隠岐郡に根ざした青年団体として、地域の未来づくりと自己成長に取り組んでいます。<br>〒685-0000 島根県隠岐郡隠岐の島町○○○</p>
+      <a href="#" target="_blank" rel="noopener" class="footer-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+    <div class="footer-nav">
+      <h4>組織について</h4>
+      <ul>
+        <li><a href="about.html">JCについて</a></li>
+        <li><a href="members.html">メンバー紹介</a></li>
+        <li><a href="national-jc.html">全国JC活動</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>活動・情報</h4>
+      <ul>
+        <li><a href="activities.html">活動・事業</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="oki-info.html">隠岐の魅力</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>参加・支援</h4>
+      <ul>
+        <li><a href="join.html">入会案内</a></li>
+        <li><a href="sponsor.html">スポンサー募集</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 隠岐青年会議所. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

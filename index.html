@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隠岐青年会議所 | OKI Junior Chamber</title>
+  <meta name="description" content="島根県隠岐郡の青年会議所。島の未来を担う青年たちが、地域づくりと自己成長に挑戦しています。">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== ヒーローセクション ===== */
+    .hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #023047 0%, #023e8a 40%, #0077b6 70%, #00b4d8 100%);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://picsum.photos/seed/oki-ocean/1600/900') center/cover no-repeat;
+      opacity: 0.2;
+    }
+    .hero-waves {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+    .hero-content {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 120px 24px 100px;
+      width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 30px;
+      color: rgba(255,255,255,0.9);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--accent-light);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 900;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero h1 .accent { color: var(--accent-light); }
+    .hero-sub {
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 20px;
+      letter-spacing: 3px;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      max-width: 520px;
+      line-height: 1.9;
+      margin-bottom: 40px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 100px;
+      right: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+      animation: scrollLine 2s infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ===== 統計 ===== */
+    .stats-section {
+      background: white;
+      padding: 56px 24px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    }
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    .stat-card {
+      padding: 24px 16px;
+      border-radius: 16px;
+      background: var(--bg);
+      transition: var(--transition);
+    }
+    .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .stat-card .num {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-card .num .unit { font-size: 24px; }
+    .stat-card .label { font-size: 13px; color: var(--gray); font-weight: 500; }
+
+    /* ===== JCについて概要 ===== */
+    .about-home {
+      background: var(--bg);
+    }
+    .about-home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-home-img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-hover);
+    }
+    .about-home-img img {
+      width: 100%; height: 400px; object-fit: cover;
+    }
+    .about-home-body .section-title { text-align: left; }
+    .about-home-body .section-divider { margin: 16px 0; }
+    .about-home-body p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+
+    /* ===== 活動カード ===== */
+    .activity-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    /* ===== お知らせ ===== */
+    .news-home {
+      background: var(--bg);
+    }
+    .news-home-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+    }
+
+    /* ===== Instagram CTA ===== */
+    .instagram-cta {
+      background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+      padding: 80px 24px;
+      text-align: center;
+      color: white;
+    }
+    .instagram-cta h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .instagram-cta p {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 32px;
+    }
+    .instagram-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: white;
+      color: #833ab4;
+      border-radius: 40px;
+      font-size: 16px;
+      font-weight: 900;
+      transition: var(--transition);
+    }
+    .instagram-cta-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      color: #833ab4;
+    }
+    .instagram-cta-btn svg { width: 22px; height: 22px; }
+
+    /* ===== 入会 CTA ===== */
+    .join-cta {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      padding: 80px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .join-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='2' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E");
+    }
+    .join-cta h2 {
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 900;
+      color: white;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .join-cta p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .join-cta-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    /* ===== フェードイン ===== */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .about-home-grid { grid-template-columns: 1fr; gap: 32px; }
+      .activity-cards { grid-template-columns: 1fr; }
+      .news-home-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-scroll { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header class="header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <div class="header-logo-icon">OKI<br>JC</div>
+      <div class="header-logo-text">
+        <span class="org-name">隠岐青年会議所</span>
+        <span class="org-sub">OKI JUNIOR CHAMBER</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="about.html">JCについて</a>
+      <a href="activities.html">活動・事業</a>
+      <a href="news.html">お知らせ</a>
+      <a href="oki-info.html">隠岐の魅力</a>
+      <a href="sponsor.html">スポンサー</a>
+    </nav>
+    <div class="header-right">
+      <a href="#" target="_blank" rel="noopener" class="header-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="join.html" class="header-join-btn">入会案内</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- モバイルメニュー -->
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="index.html">🏠 ホーム</a>
+  <a href="about.html">📖 JCについて</a>
+  <a href="members.html">👥 メンバー紹介</a>
+  <a href="activities.html">🎯 活動・事業</a>
+  <a href="news.html">📢 お知らせ</a>
+  <a href="oki-info.html">🏝️ 隠岐の魅力</a>
+  <a href="national-jc.html">🗾 全国JC活動</a>
+  <a href="sponsor.html">🤝 スポンサー募集</a>
+  <a href="join.html">✨ 入会案内</a>
+  <a href="#" target="_blank" rel="noopener" class="mobile-instagram">📷 Instagram をフォロー</a>
+</nav>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🏝️ 島根県隠岐郡 &#x2022; OKI JUNIOR CHAMBER</div>
+    <h1>島の<span class="accent">未来</span>を、<br>若者の<span class="accent">力</span>で。</h1>
+    <p class="hero-sub">OKI JUNIOR CHAMBER</p>
+    <p class="hero-desc">
+      隠岐青年会議所は、島根県隠岐の島に根ざした青年団体です。<br>
+      地域の可能性を信じ、仲間と共に成長しながら、<br>
+      より豊かな隠岐の未来を創ります。
+    </p>
+    <div class="hero-btns">
+      <a href="about.html" class="btn btn-primary">JCについて詳しく</a>
+      <a href="join.html" class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.6);">入会案内を見る</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+  <div class="hero-waves">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path fill="white" d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"/>
+    </svg>
+  </div>
+</section>
+
+<!-- 統計 -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stat-card fade-in">
+      <div class="num">40<span class="unit">+</span></div>
+      <div class="label">設立からの年数</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="num">30<span class="unit">名</span></div>
+      <div class="label">現在のメンバー数</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="num">20<span class="unit">+</span></div>
+      <div class="label">年間活動・事業数</div>
+    </div>
+    <div class="stat-card fade-in">
+      <div class="num">4<span class="unit">島</span></div>
+      <div class="label">活動対象エリア</div>
+    </div>
+  </div>
+</section>
+
+<!-- JCについて概要 -->
+<section class="section about-home">
+  <div class="section-inner">
+    <div class="about-home-grid">
+      <div class="about-home-img fade-in">
+        <img src="https://picsum.photos/seed/oki-jc-team/700/400" alt="隠岐青年会議所メンバー">
+      </div>
+      <div class="about-home-body fade-in">
+        <div class="section-tag">ABOUT US</div>
+        <h2 class="section-title">隠岐青年会議所とは</h2>
+        <div class="section-divider"></div>
+        <p>
+          隠岐青年会議所（OKI JC）は、島根県隠岐郡を拠点とする公益社団法人日本青年会議所の認定地域青年会議所です。
+          20代〜40代の青年メンバーが集い、地域の課題解決と未来づくりに取り組んでいます。
+        </p>
+        <p>
+          「修練・奉仕・友情」の三信条のもと、自己成長と地域貢献を両立しながら、
+          隠岐の島々をより豊かにするための活動を年間を通じて実施しています。
+        </p>
+        <a href="about.html" class="btn btn-primary" style="margin-top:8px;">詳しく見る →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 活動・事業 -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="section-tag">ACTIVITIES</div>
+      <h2 class="section-title">主な<span>活動・事業</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">地域づくり、青少年育成、環境保全など、多彩な活動を行っています。</p>
+    </div>
+    <div class="activity-cards">
+      <div class="card fade-in">
+        <img class="card-img" src="https://picsum.photos/seed/oki-community/600/300" alt="地域づくり">
+        <div class="card-body">
+          <span class="card-tag">地域づくり</span>
+          <h3 class="card-title">隠岐の魅力発信事業</h3>
+          <p class="card-text">隠岐の豊かな自然・文化・食を国内外に発信する取り組みを推進しています。</p>
+        </div>
+      </div>
+      <div class="card fade-in">
+        <img class="card-img" src="https://picsum.photos/seed/oki-youth/600/300" alt="青少年育成">
+        <div class="card-body">
+          <span class="card-tag">青少年育成</span>
+          <h3 class="card-title">子どもたちの未来育成プログラム</h3>
+          <p class="card-text">島の子どもたちが夢を持ち、生き生きと成長できる機会を創出しています。</p>
+        </div>
+      </div>
+      <div class="card fade-in">
+        <img class="card-img" src="https://picsum.photos/seed/oki-environment/600/300" alt="環境保全">
+        <div class="card-body">
+          <span class="card-tag">環境保全</span>
+          <h3 class="card-title">海岸清掃・自然保護活動</h3>
+          <p class="card-text">世界ジオパークにも認定された隠岐の豊かな自然環境を守る活動を行っています。</p>
+        </div>
+      </div>
+    </div>
+    <div class="btn-center fade-in">
+      <a href="activities.html" class="btn btn-outline">活動一覧を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- お知らせ -->
+<section class="section news-home" style="background:var(--bg);">
+  <div class="section-inner">
+    <div class="news-home-inner">
+      <div>
+        <div class="section-tag">NEWS</div>
+        <h2 class="section-title fade-in">お知らせ</h2>
+        <div class="section-divider" style="margin:16px 0 32px;"></div>
+        <div class="news-list fade-in">
+          <div class="news-item">
+            <span class="news-date">2026.04.15</span>
+            <div>
+              <span class="badge badge-blue" style="margin-bottom:4px;">イベント</span>
+              <div class="news-title"><a href="news.html">2026年度 通常総会を開催いたします</a></div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">2026.03.28</span>
+            <div>
+              <span class="badge badge-green" style="margin-bottom:4px;">活動報告</span>
+              <div class="news-title"><a href="news.html">春の海岸清掃活動を実施しました</a></div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">2026.03.10</span>
+            <div>
+              <span class="badge badge-orange" style="margin-bottom:4px;">お知らせ</span>
+              <div class="news-title"><a href="news.html">新入会員募集のご案内（随時受付中）</a></div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">2026.02.20</span>
+            <div>
+              <span class="badge badge-purple" style="margin-bottom:4px;">メディア</span>
+              <div class="news-title"><a href="news.html">地元新聞に活動が掲載されました</a></div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">2026.01.15</span>
+            <div>
+              <span class="badge badge-blue" style="margin-bottom:4px;">イベント</span>
+              <div class="news-title"><a href="news.html">新年互礼会を開催しました</a></div>
+            </div>
+          </div>
+        </div>
+        <a href="news.html" class="btn btn-outline" style="margin-top:32px;">お知らせ一覧へ</a>
+      </div>
+      <div class="fade-in">
+        <div class="section-tag">OKI CHARM</div>
+        <h2 class="section-title">隠岐の魅力</h2>
+        <div class="section-divider" style="margin:16px 0 24px;"></div>
+        <img src="https://picsum.photos/seed/oki-island/600/320" alt="隠岐の絶景" style="width:100%;height:240px;object-fit:cover;border-radius:16px;margin-bottom:20px;">
+        <p style="font-size:14px;color:var(--gray);line-height:1.9;margin-bottom:20px;">
+          隠岐は島根県沖に浮かぶ4つの島々からなる離島地域です。
+          ユネスコ世界ジオパークに認定された大地の歴史、豊かな海の幸、
+          独自の文化と伝統が息づく、日本でも稀有な場所です。
+        </p>
+        <a href="oki-info.html" class="btn btn-primary">隠岐の魅力を見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Instagram CTA -->
+<section class="instagram-cta">
+  <div class="fade-in">
+    <p style="font-size:13px;letter-spacing:3px;opacity:0.8;margin-bottom:12px;">FOLLOW US</p>
+    <h2>Instagramで最新情報をチェック！</h2>
+    <p>活動の様子や隠岐の日常を毎日発信中。ぜひフォローしてください。</p>
+    <a href="#" target="_blank" rel="noopener" class="instagram-cta-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      @oki_jc をフォローする
+    </a>
+  </div>
+</section>
+
+<!-- 入会CTA -->
+<section class="join-cta">
+  <h2>一緒に、隠岐の未来を創りませんか？</h2>
+  <p>20歳〜40歳の方ならどなたでも入会できます。<br>まずはお気軽にお問い合わせください。</p>
+  <div class="join-cta-btns">
+    <a href="join.html" class="btn btn-accent">入会案内を見る</a>
+    <a href="sponsor.html" class="btn btn-outline" style="color:white;border-color:rgba(255,255,255,0.5);">スポンサーになる</a>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-icon">OKI<br>JC</div>
+        <div class="footer-logo-text">
+          <div class="org-name">隠岐青年会議所</div>
+          <div class="org-sub">OKI JUNIOR CHAMBER</div>
+        </div>
+      </div>
+      <p class="footer-desc">
+        島根県隠岐郡に根ざした青年団体として、<br>
+        地域の未来づくりと自己成長に取り組んでいます。<br>
+        〒685-0000 島根県隠岐郡隠岐の島町○○○
+      </p>
+      <a href="#" target="_blank" rel="noopener" class="footer-instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+    <div class="footer-nav">
+      <h4>組織について</h4>
+      <ul>
+        <li><a href="about.html">JCについて</a></li>
+        <li><a href="members.html">メンバー紹介</a></li>
+        <li><a href="national-jc.html">全国JC活動</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>活動・情報</h4>
+      <ul>
+        <li><a href="activities.html">活動・事業</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="oki-info.html">隠岐の魅力</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>参加・支援</h4>
+      <ul>
+        <li><a href="join.html">入会案内</a></li>
+        <li><a href="sponsor.html">スポンサー募集</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 隠岐青年会議所. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
