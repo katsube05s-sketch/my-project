@@ -86,31 +86,23 @@ ul {
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
-.header-logo-icon {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 900;
-  font-size: 14px;
-  letter-spacing: -0.5px;
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
 }
 
 .header-logo-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .header-logo-text .org-name {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--primary-dark);
   letter-spacing: 0.5px;
@@ -119,7 +111,14 @@ ul {
 .header-logo-text .org-sub {
   font-size: 10px;
   color: var(--gray);
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+}
+
+/* フッターロゴ画像 */
+.footer-logo-img {
+  height: 52px;
+  width: auto;
+  display: block;
 }
 
 .header-nav {

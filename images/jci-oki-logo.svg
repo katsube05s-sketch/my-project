@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340" role="img" aria-label="JCI Oki">
+
+  <!-- JCI テキスト (大) -->
+  <text x="4" y="218"
+    font-family="'Arial Black','Arial Bold',Arial,'Helvetica Neue',Helvetica,sans-serif"
+    font-size="218" font-weight="900" letter-spacing="-6"
+    fill="#009FDA">JCI</text>
+
+  <!-- シールド外枠 -->
+  <path d="M345 22 Q345 12 355 12 L462 12 Q472 12 472 22
+           L472 158 Q472 232 408 262 Q344 232 344 158 Z"
+    fill="none" stroke="#009FDA" stroke-width="13" stroke-linejoin="round"/>
+
+  <!-- 地球儀：外円 -->
+  <circle cx="408" cy="132" r="55" fill="none" stroke="#009FDA" stroke-width="7"/>
+
+  <!-- 地球儀：縦経線（中心） -->
+  <ellipse cx="408" cy="132" rx="27" ry="55" fill="none" stroke="#009FDA" stroke-width="5"/>
+
+  <!-- 地球儀：縦経線（左右） -->
+  <ellipse cx="408" cy="132" rx="46" ry="55" fill="none" stroke="#009FDA" stroke-width="3"/>
+
+  <!-- 地球儀：横緯線（赤道） -->
+  <line x1="353" y1="132" x2="463" y2="132" stroke="#009FDA" stroke-width="5"/>
+
+  <!-- 地球儀：横緯線（上下） -->
+  <path d="M356 108 Q408 100 460 108" fill="none" stroke="#009FDA" stroke-width="4"/>
+  <path d="M356 156 Q408 164 460 156" fill="none" stroke="#009FDA" stroke-width="4"/>
+  <path d="M365 84  Q408 74  451 84"  fill="none" stroke="#009FDA" stroke-width="3"/>
+  <path d="M365 180 Q408 190 451 180" fill="none" stroke="#009FDA" stroke-width="3"/>
+
+  <!-- TM マーク -->
+  <text x="478" y="30"
+    font-family="Arial,'Helvetica Neue',sans-serif"
+    font-size="19" font-weight="600" fill="#009FDA">TM</text>
+
+  <!-- Oki テキスト（下部中央） -->
+  <text x="258" y="322"
+    font-family="'Arial Black','Arial Bold',Arial,'Helvetica Neue',Helvetica,sans-serif"
+    font-size="82" font-weight="900" letter-spacing="6"
+    fill="#009FDA" text-anchor="middle">Oki</text>
+
+</svg>
